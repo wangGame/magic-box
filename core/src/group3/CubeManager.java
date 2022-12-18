@@ -1,6 +1,9 @@
 package group3;
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Array;
+
+import java.util.HashMap;
 
 import action.RotationAction;
 
@@ -28,6 +31,7 @@ public class CubeManager{
     }
 
     public void backRotation90() {
+        update();
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
 //                cubeActors[x][y][0].addAction(new Ac);
@@ -39,9 +43,11 @@ public class CubeManager{
                 cubeActors[x][y][0].addAction(action);
             }
         }
+
     }
 
     public void backMiddleRotation90() {
+        update();
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
 //                cubeActors[x][y][1].modelInstance.transform.rotate(0,0,1,90);
@@ -56,6 +62,7 @@ public class CubeManager{
     }
 
     public void frontRotation90() {
+        update();
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
 //                cubeActors[x][y][2].modelInstance.transform.rotate(0,0,1,90);
@@ -71,6 +78,7 @@ public class CubeManager{
 
 
     public void leftRotation90() {
+        update();
         for (int y = 0; y < 3; y++) {
             for (int z = 0; z < 3; z++) {
 //                cubeActors[0][y][z].modelInstance.transform.rotate(1,0,0,90);
@@ -86,6 +94,7 @@ public class CubeManager{
 
 
     public void leftMiddleRotation90() {
+        update();
         for (int y = 0; y < 3; y++) {
             for (int z = 0; z < 3; z++) {
 //                cubeActors[1][y][z].modelInstance.transform.rotate(1,0,0,90);
@@ -101,6 +110,7 @@ public class CubeManager{
 
 
     public void rightRotation90() {
+        update();
         for (int y = 0; y < 3; y++) {
             for (int z = 0; z < 3; z++) {
 //                cubeActors[2][y][z].modelInstance.transform.rotate(1,0,0,90);
@@ -115,6 +125,7 @@ public class CubeManager{
     }
 
     public void bottomRotation90() {
+        update();
         for (int x = 0; x < 3; x++) {
             for (int z = 0; z < 3; z++) {
 //                cubeActors[x][0][z].modelInstance.transform.rotate(0,1,0,90);
@@ -130,6 +141,7 @@ public class CubeManager{
 
 
     public void bottomMiddleRotation90() {
+        update();
         for (int x = 0; x < 3; x++) {
             for (int z = 0; z < 3; z++) {
 //                cubeActors[x][1][z].modelInstance.transform.rotate(0,1,0,90);
@@ -146,6 +158,7 @@ public class CubeManager{
 
 
     public void upRotation90() {
+        update();
         for (int x = 0; x < 3; x++) {
             for (int z = 0; z < 3; z++) {
 //                cubeActors[x][2][z].modelInstance.transform.rotate(0,1,0,90);
@@ -158,6 +171,23 @@ public class CubeManager{
                 cubeActors[x][2][z].addAction(action);
             }
         }
+    }
+
+    public void update(){
+//        Array<CubeActor> cubeActorsa = new Array<CubeActor>();
+//        for (CubeActor[][] cubeActor : cubeActors) {
+//            for (CubeActor[] actors : cubeActor) {
+//                for (CubeActor actor : actors) {
+//                    cubeActorsa.add(actor);
+//                }
+//            }
+//        }
+//        for (CubeActor actor : cubeActorsa) {
+//            float x = actor.getX();
+//            float y = actor.getY();
+//            float z = actor.getZ();
+//            cubeActors[(int)(x+1.5)][(int) (y+1.5)][(int) (z+1.5)] = actor;
+//        }
     }
 
     public void showF() {

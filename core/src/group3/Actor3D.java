@@ -70,4 +70,16 @@ public class Actor3D {
         action.begin();
         System.out.println(array.size);
     }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getZ() {
+        return z;
+    }
 }
