@@ -281,4 +281,55 @@ public class CubeActor extends Actor3D {
 //        endColor[4] = Color.BLACK;
 //        endColor[5] = Color.ORANGE;
     }
+
+    public void rotationBackRotationN(CubeActor baseActor) {
+        Color oldColor0 = baseActor.getColorByIndex(0);
+        Color oldColor1 = baseActor.getColorByIndex(1);
+        Color oldColor2 = baseActor.getColorByIndex(2);
+        Color oldColor3 = baseActor.getColorByIndex(3);
+        Color oldColor4 = baseActor.getColorByIndex(4);
+        Color oldColor5 = baseActor.getColorByIndex(5);
+        color[0] = new Color(oldColor5);
+        color[1] = new Color(oldColor4);
+        color[4] = new Color(oldColor0);
+        color[5] = new Color(oldColor1);
+
+
+        color[2] = new Color(oldColor2);
+        color[3] = new Color(oldColor3);
+        setColor();
+    }
+
+    public void bottomRotationN(CubeActor baseActor) {
+        Color oldColor0 = baseActor.getColorByIndex(0);
+        Color oldColor1 = baseActor.getColorByIndex(1);
+        Color oldColor2 = baseActor.getColorByIndex(2);
+        Color oldColor3 = baseActor.getColorByIndex(3);
+        Color oldColor4 = baseActor.getColorByIndex(4);
+        Color oldColor5 = baseActor.getColorByIndex(5);
+        color[4] = new Color(oldColor2);
+        color[3] = new Color(oldColor4);
+        color[5] = new Color(oldColor3);
+        color[2] = new Color(oldColor5);
+        color[0] = new Color(oldColor0);
+        color[1] = new Color(oldColor1);
+        setColor();
+    }
+
+    public void leftRotationN(CubeActor baseActor) {
+        Color oldColor0 = baseActor.getColorByIndex(0);
+        Color oldColor1 = baseActor.getColorByIndex(1);
+        Color oldColor2 = baseActor.getColorByIndex(2);
+        Color oldColor3 = baseActor.getColorByIndex(3);
+        Color oldColor4 = baseActor.getColorByIndex(4);
+        Color oldColor5 = baseActor.getColorByIndex(5);
+        color[0] = new Color(oldColor2);
+        color[3] = new Color(oldColor0);
+        color[1] = new Color(oldColor3);
+        color[2] = new Color(oldColor1);
+
+        color[4] = new Color(oldColor4);
+        color[5] = new Color(oldColor5);
+        setColor();
+    }
 }
