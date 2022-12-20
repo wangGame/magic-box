@@ -8,7 +8,7 @@ import call.CallBack;
 import group3.Actor3D;
 import group3.CubeActor;
 
-public class RotationAction extends Action{
+public class RotationActionN extends Action{
     private Vector3 vector3 = new Vector3();
     private float angle;
     private float startAngle;
@@ -16,7 +16,7 @@ public class RotationAction extends Action{
     private float endAngle;
     private CallBack runnable;
 
-    public RotationAction(CallBack runnable){
+    public RotationActionN(CallBack runnable){
         this.runnable = runnable;
     }
 
@@ -41,11 +41,11 @@ public class RotationAction extends Action{
         if (modelInstance!=null){
             float v = angle / time;
             startAngle+=delta*v;
-            if (startAngle>endAngle){
+            if (startAngle<endAngle){
                 startAngle = endAngle;
             }
             modelInstance.transform.setToRotation(vector3,startAngle);
-            if (startAngle>=endAngle){
+            if (startAngle<=endAngle){
                 modelInstance.transform.setToRotation(vector3,0);
                 runnable.callBack((CubeActor) actor3D,(CubeActor) baseActor);
                 return true;
@@ -53,6 +53,10 @@ public class RotationAction extends Action{
             return false;
         }
         return true;
+    }
+
+    public void setActor(Actor3D actor3D) {
+        this.actor3D = actor3D;
     }
 
     public void setAngleX() {

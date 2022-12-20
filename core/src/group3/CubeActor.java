@@ -289,11 +289,11 @@ public class CubeActor extends Actor3D {
         Color oldColor3 = baseActor.getColorByIndex(3);
         Color oldColor4 = baseActor.getColorByIndex(4);
         Color oldColor5 = baseActor.getColorByIndex(5);
-        color[0] = new Color(oldColor5);
-        color[1] = new Color(oldColor4);
-        color[4] = new Color(oldColor0);
-        color[5] = new Color(oldColor1);
-
+        color[0] = new Color(oldColor4);
+        color[1] = new Color(oldColor5);
+        color[4] = new Color(oldColor1);
+        color[5] = new Color(oldColor0);
+        //5->0->4->1->
 
         color[2] = new Color(oldColor2);
         color[3] = new Color(oldColor3);
@@ -307,10 +307,11 @@ public class CubeActor extends Actor3D {
         Color oldColor3 = baseActor.getColorByIndex(3);
         Color oldColor4 = baseActor.getColorByIndex(4);
         Color oldColor5 = baseActor.getColorByIndex(5);
-        color[4] = new Color(oldColor2);
-        color[3] = new Color(oldColor4);
-        color[5] = new Color(oldColor3);
-        color[2] = new Color(oldColor5);
+        color[4] = new Color(oldColor3);
+        color[3] = new Color(oldColor5);
+        color[5] = new Color(oldColor2);
+        color[2] = new Color(oldColor4);
+//        2->4->3->5->2
         color[0] = new Color(oldColor0);
         color[1] = new Color(oldColor1);
         setColor();
@@ -323,11 +324,11 @@ public class CubeActor extends Actor3D {
         Color oldColor3 = baseActor.getColorByIndex(3);
         Color oldColor4 = baseActor.getColorByIndex(4);
         Color oldColor5 = baseActor.getColorByIndex(5);
-        color[0] = new Color(oldColor2);
-        color[3] = new Color(oldColor0);
-        color[1] = new Color(oldColor3);
-        color[2] = new Color(oldColor1);
-
+        color[0] = new Color(oldColor3);
+        color[3] = new Color(oldColor1);
+        color[1] = new Color(oldColor2);
+        color[2] = new Color(oldColor0);
+//        2->0->3->1->2
         color[4] = new Color(oldColor4);
         color[5] = new Color(oldColor5);
         setColor();

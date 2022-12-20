@@ -63,7 +63,7 @@ public class Actor3D {
         return modelInstance;
     }
 
-    public void addAction(RotationAction action) {
+    public void addAction(Action action) {
         action.setActor(this);
         array.add(action);
         action.begin();

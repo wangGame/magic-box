@@ -12,4 +12,10 @@ public class Action {
     public void begin(){
 
     }
+
+
+    public void setActor(Actor3D actor3D) {
+        this.actor3D = actor3D;
+    }
+
 }
