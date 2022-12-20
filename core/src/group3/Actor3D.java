@@ -19,7 +19,6 @@ public class Actor3D {
     }
 
     public void act(float delta){
-        System.out.println(array.size);
         Array<Action> remove = new Array<Action>();
         for (Action action : array) {
             if (action.act(delta)) {
@@ -68,7 +67,6 @@ public class Actor3D {
         action.setActor(this);
         array.add(action);
         action.begin();
-        System.out.println(array.size);
     }
 
     public float getX() {

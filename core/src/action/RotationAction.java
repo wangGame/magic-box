@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
+import call.CallBack;
 import group3.Actor3D;
+import group3.CubeActor;
 
 public class RotationAction extends Action{
     private Vector3 vector3 = new Vector3();
@@ -12,8 +14,10 @@ public class RotationAction extends Action{
     private float startAngle;
     private float time;
     private float endAngle;
+    private CallBack runnable;
 
-    public RotationAction(){
+    public RotationAction(CallBack runnable){
+        this.runnable = runnable;
     }
 
     public void begin(){
@@ -42,6 +46,8 @@ public class RotationAction extends Action{
             }
             modelInstance.transform.setToRotation(vector3,startAngle);
             if (startAngle>=endAngle){
+                modelInstance.transform.setToRotation(vector3,0);
+                runnable.callBack((CubeActor) actor3D,(CubeActor) baseActor);
                 return true;
             }
             return false;
@@ -65,5 +71,10 @@ public class RotationAction extends Action{
     public void setAngleY() {
         vector3.set(0,1,0);
         System.out.println("--------------");
+    }
+
+    private Actor3D baseActor;
+    public void setBaseActor(Actor3D actor) {
+        this.baseActor = actor;
     }
 }

@@ -13,24 +13,23 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
-import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
-
-import action.RotationAction;
-import cubesolve.Cube;
-import cubesolve.Cubelet;
 
 public class CubeActor extends Actor3D {
     //    public Model model;
-    public Color[] color;
-    public Color[] endColor;
-    public  MeshBuilder builder;
-
+    private Color[] color;
+    private Color[] endColor;
+    private MeshBuilder builder;
+    private ModelBuilder modelBuilder;
+    private Material cubeMaterial;
     public CubeActor() {
+        modelBuilder = new ModelBuilder();
+        builder = new MeshBuilder();
+        Texture cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
+        cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
+                TextureAttribute.createDiffuse(cubeletTexture));
         endColor = new Color[6];
         color = new Color[6];
         color[0] = Color.WHITE;
@@ -42,13 +41,10 @@ public class CubeActor extends Actor3D {
     }
 
     public void init() {
-        ModelBuilder modelBuilder = new ModelBuilder();
-        Texture cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
-        Material cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
-                TextureAttribute.createDiffuse(cubeletTexture));
         modelBuilder.begin();
-        builder = new MeshBuilder();
-        builder.begin(VertexAttributes.Usage.Position | VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
+
+        builder.begin(VertexAttributes.Usage.Position |
+                VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
 
         //上
         builder.setColor(color[0]);
@@ -132,8 +128,7 @@ public class CubeActor extends Actor3D {
         batch.render(modelInstance, environment);
     }
 
-    public void setUpColor(Color color) {
-        this.color[0] = color;
+    public void setUpColor() {
         builder.setColor(this.color[0]);
         builder.setUVRange(0, 0, width, height);
         builder.rect(x, y + depth, z + depth,
@@ -143,8 +138,7 @@ public class CubeActor extends Actor3D {
                 0, 1, 0);
     }
 
-    public void setDownColor(Color color) {
-        this.color[1] = color;
+    public void setDownColor() {
         builder.setColor(this.color[1]);
         builder.setUVRange(0, 0, width, height);
         builder.rect(x, y, z,
@@ -155,8 +149,7 @@ public class CubeActor extends Actor3D {
     }
 
 
-    public void setLeftColor(Color color) {
-        this.color[4] = color;
+    public void setLeftColor() {
         builder.setColor(this.color[4]);
         builder.setUVRange(0, 0, width, height);
         builder.rect(x, y, z + depth,
@@ -166,8 +159,7 @@ public class CubeActor extends Actor3D {
                 -1, 0, 0);
     }
 
-    public void setRightColor(Color color) {
-        //you
+    public void setRightColor() {
         builder.setColor(this.color[5]);
         builder.setUVRange(0, 0, width, height);
         builder.rect(x + depth, y, z,
@@ -177,8 +169,7 @@ public class CubeActor extends Actor3D {
                 1, 0, 0);
     }
 
-    public void setFrontColor(Color color) {
-        this.color[3] = color;
+    public void setFrontColor() {
         builder.setColor(this.color[3]);
         builder.setUVRange(0, 0, width, height);
         builder.rect(x, y, z + depth,
@@ -189,8 +180,7 @@ public class CubeActor extends Actor3D {
 
     }
 
-    public void setBackColor(Color color) {
-        this.color[2] = color;
+    public void setBackColor() {
         builder.setColor(this.color[2]);
         builder.setUVRange(0, 0, width, height);
         builder.rect(x, y + depth, z,
@@ -212,4 +202,68 @@ public class CubeActor extends Actor3D {
         }
     }
 
+    public void setColor(){
+        init();
+//        setUpColor();
+//        setDownColor();
+//        setLeftColor();
+//        setRightColor();
+//        setFrontColor();
+//        setBackColor();
+    }
+
+    public void rotationBackRotation(CubeActor baseActor) {
+        Color oldColor0 = baseActor.getColorByIndex(0);
+        Color oldColor1 = baseActor.getColorByIndex(1);
+        Color oldColor2 = baseActor.getColorByIndex(2);
+        Color oldColor3 = baseActor.getColorByIndex(3);
+        Color oldColor4 = baseActor.getColorByIndex(4);
+        Color oldColor5 = baseActor.getColorByIndex(5);
+        color[0] = oldColor5;
+        color[1] = oldColor4;
+        color[4] = oldColor0;
+        color[5] = oldColor1;
+        setColor();
+    }
+
+    private Color getColorByIndex(int i) {
+        return endColor[i];
+    }
+
+    public void leftRotation(CubeActor baseActor) {
+        Color oldColor0 = baseActor.getColorByIndex(0);
+        Color oldColor1 = baseActor.getColorByIndex(1);
+        Color oldColor2 = baseActor.getColorByIndex(2);
+        Color oldColor3 = baseActor.getColorByIndex(3);
+        Color oldColor4 = baseActor.getColorByIndex(4);
+        Color oldColor5 = baseActor.getColorByIndex(5);
+        color[0] = oldColor2;
+        color[3] = oldColor0;
+        color[1] = oldColor3;
+        color[2] = oldColor1;
+        setColor();
+    }
+
+    public void bottomRotation(CubeActor baseActor) {
+        Color oldColor0 = baseActor.getColorByIndex(0);
+        Color oldColor1 = baseActor.getColorByIndex(1);
+        Color oldColor2 = baseActor.getColorByIndex(2);
+        Color oldColor3 = baseActor.getColorByIndex(3);
+        Color oldColor4 = baseActor.getColorByIndex(4);
+        Color oldColor5 = baseActor.getColorByIndex(5);
+        color[4] = oldColor2;
+        color[3] = oldColor4;
+        color[5] = oldColor3;
+        color[2] = oldColor5;
+        setColor();
+    }
+
+    public void updateEndColor() {
+        endColor[0] = color[0];
+        endColor[1] = color[1];
+        endColor[2] = color[2];
+        endColor[3] = color[3];
+        endColor[4] = color[4];
+        endColor[5] = color[5];
+    }
 }
