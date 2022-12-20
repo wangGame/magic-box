@@ -219,15 +219,19 @@ public class CubeActor extends Actor3D {
         Color oldColor3 = baseActor.getColorByIndex(3);
         Color oldColor4 = baseActor.getColorByIndex(4);
         Color oldColor5 = baseActor.getColorByIndex(5);
-        color[0] = oldColor5;
-        color[1] = oldColor4;
-        color[4] = oldColor0;
-        color[5] = oldColor1;
+        color[0] = new Color(oldColor5);
+        color[1] = new Color(oldColor4);
+        color[4] = new Color(oldColor0);
+        color[5] = new Color(oldColor1);
+
+
+        color[2] = new Color(oldColor2);
+        color[3] = new Color(oldColor3);
         setColor();
     }
 
     private Color getColorByIndex(int i) {
-        return endColor[i];
+        return new Color(endColor[i]);
     }
 
     public void leftRotation(CubeActor baseActor) {
@@ -237,10 +241,13 @@ public class CubeActor extends Actor3D {
         Color oldColor3 = baseActor.getColorByIndex(3);
         Color oldColor4 = baseActor.getColorByIndex(4);
         Color oldColor5 = baseActor.getColorByIndex(5);
-        color[0] = oldColor2;
-        color[3] = oldColor0;
-        color[1] = oldColor3;
-        color[2] = oldColor1;
+        color[0] = new Color(oldColor2);
+        color[3] = new Color(oldColor0);
+        color[1] = new Color(oldColor3);
+        color[2] = new Color(oldColor1);
+
+        color[4] = new Color(oldColor4);
+        color[5] = new Color(oldColor5);
         setColor();
     }
 
@@ -251,19 +258,27 @@ public class CubeActor extends Actor3D {
         Color oldColor3 = baseActor.getColorByIndex(3);
         Color oldColor4 = baseActor.getColorByIndex(4);
         Color oldColor5 = baseActor.getColorByIndex(5);
-        color[4] = oldColor2;
-        color[3] = oldColor4;
-        color[5] = oldColor3;
-        color[2] = oldColor5;
+        color[4] = new Color(oldColor2);
+        color[3] = new Color(oldColor4);
+        color[5] = new Color(oldColor3);
+        color[2] = new Color(oldColor5);
+        color[0] = new Color(oldColor0);
+        color[1] = new Color(oldColor1);
         setColor();
     }
 
     public void updateEndColor() {
-        endColor[0] = color[0];
-        endColor[1] = color[1];
-        endColor[2] = color[2];
-        endColor[3] = color[3];
-        endColor[4] = color[4];
-        endColor[5] = color[5];
+        endColor[0] = new Color(color[0]);
+        endColor[1] = new Color(color[1]);
+        endColor[2] = new Color(color[2]);
+        endColor[3] = new Color(color[3]);
+        endColor[4] = new Color(color[4]);
+        endColor[5] = new Color(color[5]);
+//        endColor[0] = Color.WHITE;
+//        endColor[1] = Color.RED;
+//        endColor[2] = Color.GREEN;
+//        endColor[3] = Color.BLUE;
+//        endColor[4] = Color.BLACK;
+//        endColor[5] = Color.ORANGE;
     }
 }
