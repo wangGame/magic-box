@@ -19,10 +19,12 @@ public class Actor3D {
     protected float width;
     protected float height;
     protected BoundingBox boundingBox;
+    protected BoundingBox boundingBoxs[];
 
     public Actor3D(){
         array = new Array<Action>();
         boundingBox = new BoundingBox();
+        boundingBoxs = new BoundingBox[6];
     }
 
     public void act(float delta){
@@ -99,8 +101,9 @@ public class Actor3D {
         boundingBox.getCenter(center);
         boundingBox.getDimensions(dimensions);
         modelInstance.transform.getTranslation(position).add(center);
-        if (Intersector.intersectRayBoundsFast(pickRay, position, dimensions))
+        if (Intersector.intersectRayBoundsFast(pickRay, position, dimensions)){
             return pickRay.origin.dst2(position);
+        }
         return -1f;
     }
 
@@ -117,4 +120,6 @@ public class Actor3D {
             return this;
         }return null;
     }
+
+    public void rayTest(Ray ray){}
 }

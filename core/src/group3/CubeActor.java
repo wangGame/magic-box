@@ -15,7 +15,12 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
+import com.badlogic.gdx.math.collision.Ray;
+import com.badlogic.gdx.utils.Array;
 
 public class CubeActor extends Actor3D {
     //    public Model model;
@@ -25,6 +30,7 @@ public class CubeActor extends Actor3D {
     private ModelBuilder modelBuilder;
     private Material cubeMaterial;
     private Model model;
+
     public CubeActor() {
         height = width = depth = 1;
         modelBuilder = new ModelBuilder();
@@ -55,7 +61,9 @@ public class CubeActor extends Actor3D {
                 x + depth, y + depth, z,
                 x, y + depth, z,
                 0, 1, 0);
-
+        BoundingBox boundingBoxUp = new BoundingBox();
+        boundingBoxUp.set(new Vector3(0,2,0),new Vector3(2,2,2));
+        boundingBoxs[0] = boundingBoxUp;
         //下
         builder.setColor(color[1]);
         builder.setUVRange(0, 0, width, height);
@@ -64,7 +72,9 @@ public class CubeActor extends Actor3D {
                 x + depth, y, z + depth,
                 x, y, z + depth,
                 0, -1, 0);
-
+        BoundingBox boundingBoxDown = new BoundingBox();
+        boundingBoxDown.set(new Vector3(0,0,0),new Vector3(2,0,2));
+        boundingBoxs[1] = boundingBoxDown;
 
         //后
         builder.setColor(color[2]);
@@ -74,6 +84,9 @@ public class CubeActor extends Actor3D {
                 x + depth, y, z,
                 x, y, z,
                 0, 0, -1);
+        BoundingBox boundingBoxBack = new BoundingBox();
+        boundingBoxBack.set(new Vector3(0,0,0),new Vector3(2,2,0));
+        boundingBoxs[2] = boundingBoxBack;
 
         //qian
         builder.setColor(color[3]);
@@ -83,6 +96,9 @@ public class CubeActor extends Actor3D {
                 x + depth, y + depth, z + depth,
                 x, y + depth, z + depth,
                 0, 0, 1);
+        BoundingBox boundingBoxFront = new BoundingBox();
+        boundingBoxFront.set(new Vector3(0,0,0),new Vector3(2,2,2));
+        boundingBoxs[3] = boundingBoxFront;
 
         //left
         builder.setColor(color[4]);
@@ -92,7 +108,9 @@ public class CubeActor extends Actor3D {
                 x, y + depth, z,
                 x, y, z,
                 -1, 0, 0);
-
+        BoundingBox boundingBoxLeft = new BoundingBox();
+        boundingBoxLeft.set(new Vector3(0,0,0),new Vector3(0,2,2));
+        boundingBoxs[4] = boundingBoxLeft;
 
 
         //you
@@ -103,12 +121,15 @@ public class CubeActor extends Actor3D {
                 x + depth, y + depth, z + depth,
                 x + depth, y, z + depth,
                 1, 0, 0);
+        BoundingBox boundingBoxRight = new BoundingBox();
+        boundingBoxRight.set(new Vector3(2,0,0),new Vector3(2,2,2));
+        boundingBoxs[5] = boundingBoxRight;
 
         Mesh mesh = builder.end();
         modelBuilder.part("cube", mesh, GL20.GL_TRIANGLES, cubeMaterial);
         model = modelBuilder.end();
         modelInstance = new ModelInstance(model);
-        model.calculateBoundingBox(boundingBox);
+        model.calculateBoundingBox(this.boundingBox);
     }
 
     public float getAgree() {
@@ -210,12 +231,37 @@ public class CubeActor extends Actor3D {
 
     public void setColor(){
         init();
+
+//        for (Material m : modelInstance.materials)
+//            m.set(ColorAttribute.createDiffuse(c));
 //        setUpColor();
 //        setDownColor();
 //        setLeftColor();
 //        setRightColor();
 //        setFrontColor();
 //        setBackColor();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public void rotationBackRotation(CubeActor baseActor) {
@@ -340,7 +386,34 @@ public class CubeActor extends Actor3D {
         setColor();
     }
 
-    public void addListener() {
+    public void rayTest(Ray ray){
+        float distance = -1;
+        int index = 0;
+        for (int i = 0; i < boundingBoxs.length; i++) {
+            BoundingBox box = boundingBoxs[i];
+            float dist2 = disten(box,ray);
+            if (dist2 >= 0f && (distance < 0f || dist2 <= distance)) {
+                index = i;
+                distance = dist2;
+            }
+        }
+        color[index] = Color.GRAY;
+        init();
+    }
+
+
+    public float disten(BoundingBox boundingBox,Ray ray){
+        boundingBox.getCenter(center);
+        boundingBox.getDimensions(dimensions);
+        Vector3 min = new Vector3(boundingBox.min);
+        min.add(center);
+
+
+        if (Intersector.intersectRayBoundsFast(ray, min, dimensions)){
+            return ray.origin.dst2(min);
+        }
+        return -1f;
 
     }
+
 }
