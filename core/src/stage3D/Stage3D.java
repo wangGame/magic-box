@@ -77,6 +77,18 @@ public class Stage3D extends InputAdapter implements Disposable {
                     break;
                 }
             }
+            float distance = -1;
+            Actor3D actor3D = null;
+            for (Actor3D child : getRoot().getChildren()) {
+                float dist2 = child.hit1(pickRay);
+                if (dist2 >= 0f && (distance < 0f || dist2 <= distance)) {
+                    actor3D = child;
+                    distance = dist2;
+                }
+            }
+            if (actor3D!=null) {
+                actor3D.getModelInstance().transform.scale(0.9f,0.9f,0.9f);
+            }
 //            if (x >= 0 && x < Constance.MAP_WIDTH && z >= 0 && z < Constance.MAP_HEIGHT) {
 //                if (lastSelectedTile != null) {
 //                    lastSelectedTile.setUseLighting(true);

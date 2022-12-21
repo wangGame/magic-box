@@ -3,8 +3,10 @@ package group3;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
 
 import action.Action;
@@ -17,6 +19,7 @@ public class Actor3D {
     protected float width;
     protected float height;
     protected BoundingBox boundingBox;
+
     public Actor3D(){
         array = new Array<Action>();
         boundingBox = new BoundingBox();
@@ -86,17 +89,32 @@ public class Actor3D {
     }
 
     private Vector3 vector3 = new Vector3();
+
+    private Vector3 position = new Vector3();
+    public final Vector3 center = new Vector3();
+    public final Vector3 dimensions = new Vector3();
+
+    public float hit1(Ray pickRay){
+        vector3.set(x,y,z);
+        boundingBox.getCenter(center);
+        boundingBox.getDimensions(dimensions);
+        modelInstance.transform.getTranslation(position).add(center);
+        if (Intersector.intersectRayBoundsFast(pickRay, position, dimensions))
+            return pickRay.origin.dst2(position);
+        return -1f;
+    }
+
     public Actor3D hit(float x,float y,float z){
-        modelInstance.transform.getTranslation(vector3);
-        if ((x>=vector3.x && x<=vector3.x+width)
-                &&(y>=vector3.y && y<=vector3.y+height)
-                &&(z>=vector3.z && x<=vector3.z+depth)) {
-            return this;
-        }
-        return null;
-//        vector3.set(x,y,z);
-//        if (boundingBox.contains(vector3)) {
+//        modelInstance.transform.getTranslation(vector3);
+//        if ((x>=vector3.x && x<=vector3.x+width)
+//                &&(y>=vector3.y && y<=vector3.y+height)
+//                &&(z>=vector3.z && x<=vector3.z+depth)) {
 //            return this;
-//        }return null;
+//        }
+//        return null;
+        vector3.set(x,y,z);
+        if (boundingBox.contains(vector3)) {
+            return this;
+        }return null;
     }
 }
