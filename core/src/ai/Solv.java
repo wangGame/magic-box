@@ -171,10 +171,11 @@ public class Solv {
         }
     }
 
-    public static void solver(String scrambledCube){
+    public static String solver(String scrambledCube){
         Search.init();
         String result = new Search().solution(scrambledCube, 21, 100000000, 0, 0);
         System.out.println(result);
+        return result;
     }
 
 }

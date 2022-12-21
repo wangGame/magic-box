@@ -1,9 +1,14 @@
 package screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 
 import cubesolve.CubeSolve;
 import group3.CubeManager;
@@ -15,6 +20,104 @@ public class GameScreen extends BaseScreen{
         super(cubeSolve);
         manager = new CubeManager(stage3D.getRoot());
         multiplexer.addProcessor(new ClickListener3D(manager));
+        Image slove = new Image(new Texture("cubelet.png"));
+        addActor(slove);
+        slove.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                String pageStr = manager.getPageStr();
+                showStep(pageStr);
+            }
+        });
+    }
+
+    private void showStep(String pageStr) {
+
+        index= 0;
+        String[] s = pageStr.split(" ");
+        final Array<String> end = new Array<String>();
+        for (String s1 : s) {
+            if (s1.contains("2")){
+                char c = s1.charAt(0);
+                for (int i = 0; i < 2; i++) {
+                    end.add(c+"");
+                }
+            }else {
+                end.add(s1);
+            }
+        }
+        Image left = new Image(new Texture("cubelet.png"));
+        addActor(left);
+        left.setSize(20,20);
+        left.setX(30);
+        Image right = new Image(new Texture("cubelet.png"));
+        addActor(right);
+        right.setSize(20,20);
+        right.setX(100);
+        left.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if (index<0){
+                    return;
+                }
+                if (index>=end.size){
+                    index = end.size-1;
+                }
+                String s1 = end.get(index);
+                jiexi(s1);
+                index --;
+            }
+        });
+        right.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if (index>=end.size){
+                    return;
+                }
+                String s1 = end.get(index);
+                jiexi(s1);
+                index++;
+            }
+        });
+    }
+
+    int index = 0;
+
+//    F F' F2
+//    U U' U2
+//    D D' D2
+//    B B' B2
+//    R R' R2
+//    L L' L2
+    public void jiexi(String str){
+         if (str.equals("F")) {
+            manager.backRotation90N(2);
+        } else if(str.equals("F'")) {
+            manager.backRotation90(2);
+        }else if(str.equals("U")) {
+             manager.bottomRotation90N(2);
+         }else if(str.equals("U'")) {
+             manager.bottomRotation90(2);
+         }else if(str.equals("D")) {
+             manager.bottomRotation90(0);
+         }else if(str.equals("D'")) {
+             manager.bottomRotation90N(0);
+         }else if(str.equals("B")) {
+             manager.backRotation90(0);
+         }else if (str.equals("B'")) {
+             manager.backRotation90N(0);
+         }else if (str.equals("R")) {
+             manager.leftRotation90N(2);
+         }else if (str.equals("R'")) {
+             manager.leftRotation90(2);
+         }else if (str.equals("L")) {
+             manager.leftRotation90(0);
+         }else if (str.equals("L'")) {
+             manager.leftRotation90N(0);
+        }
     }
 
     @Override

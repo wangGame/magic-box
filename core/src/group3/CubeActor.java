@@ -406,7 +406,7 @@ public class CubeActor extends Actor3D {
         boundingBox.getCenter(center);
         boundingBox.getDimensions(dimensions);
         Vector3 min = new Vector3(boundingBox.min);
-        min.add(center);
+
 
 
         if (Intersector.intersectRayBoundsFast(ray, min, dimensions)){

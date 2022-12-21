@@ -276,7 +276,7 @@ public class CubeManager{
         return true;
     }
 
-    public void getPageStr(){
+    public String getPageStr(){
         StringBuilder builder = new StringBuilder();
         //up
         for (int x = 0; x < 3; x++) {
@@ -369,7 +369,7 @@ public class CubeManager{
             builder.append(buildTemp.charAt(buildTemp.length()-1-i));
         }
         System.out.println(builder.toString());
-        Solv.solver(builder.toString());
+        return Solv.solver(builder.toString());
     }
 
     private String extracted(Color color) {
@@ -400,7 +400,7 @@ public class CubeManager{
     private boolean isTouch = true;
     public void render(float delta) {
         time += delta;
-        if (time>3){
+        if (time>1){
             isTouch = true;
         }else {
             isTouch = false;

@@ -68,46 +68,6 @@ public class Stage3D extends InputAdapter implements Disposable {
             System.out.println("touch down ："+Gdx.input.getX()+"    "+Gdx.input.getY());
             Ray pickRay = viewport3D.getCamera().getPickRay(Gdx.input.getX(), Gdx.input.getY());
 
-
-            Rectangle rectangle = new Rectangle();
-            BoundingBox boundingBox = new BoundingBox();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//            Intersector.intersectRayPlane(pickRay, controller.getXzPlane(), intersection);
-//            float x = intersection.x;
-//            float z = intersection.z;
-//            float y = intersection.y;
-//            System.out.println(x+"  "+y+" "+z);
-//            for (Actor3D child : getRoot().getChildren()) {
-//                if (child.hit(x, y, z)!=null) {
-//                    System.out.println(child);
-////                    child.getModelInstance().transform.scale(0.8f,0.8f,0.8f);
-//                    break;
-//                }
-//            }
             float distance = -1;
             Actor3D actor3D = null;
             for (Actor3D child : getRoot().getChildren()) {
@@ -118,8 +78,9 @@ public class Stage3D extends InputAdapter implements Disposable {
                 }
             }
             if (actor3D!=null) {
-                actor3D.getModelInstance().transform.scale(0.9f,0.9f,0.9f);
+//                actor3D.getModelInstance().transform.scale(0.9f,0.9f,0.9f);
                 actor3D.rayTest(pickRay);
+//                actor3D.getModelInstance().transform.scale(0.99f,0.99f,0.99f);
             }
 //            if (x >= 0 && x < Constance.MAP_WIDTH && z >= 0 && z < Constance.MAP_HEIGHT) {
 //                if (lastSelectedTile != null) {
