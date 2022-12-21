@@ -24,7 +24,9 @@ public class CubeActor extends Actor3D {
     private MeshBuilder builder;
     private ModelBuilder modelBuilder;
     private Material cubeMaterial;
+    private Model model;
     public CubeActor() {
+        height = width = depth = 1;
         modelBuilder = new ModelBuilder();
         builder = new MeshBuilder();
         Texture cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
@@ -42,7 +44,6 @@ public class CubeActor extends Actor3D {
 
     public void init() {
         modelBuilder.begin();
-
         builder.begin(VertexAttributes.Usage.Position |
                 VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
 
@@ -105,8 +106,9 @@ public class CubeActor extends Actor3D {
 
         Mesh mesh = builder.end();
         modelBuilder.part("cube", mesh, GL20.GL_TRIANGLES, cubeMaterial);
-        Model model = modelBuilder.end();
+        model = modelBuilder.end();
         modelInstance = new ModelInstance(model);
+        model.calculateBoundingBox(boundingBox);
     }
 
     public float getAgree() {
@@ -177,7 +179,6 @@ public class CubeActor extends Actor3D {
                 x + depth, y + depth, z + depth,
                 x, y + depth, z + depth,
                 0, 0, 1);
-
     }
 
     public void setBackColor() {
@@ -188,6 +189,11 @@ public class CubeActor extends Actor3D {
                 x + depth, y, z,
                 x, y, z,
                 0, 0, -1);
+    }
+
+    public void translate(float x,float y,float z){
+        modelInstance.transform.translate(x,y,z);
+        model.calculateBoundingBox(boundingBox);
     }
 
     public Color getColor(int index) {

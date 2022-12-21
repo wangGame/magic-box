@@ -1,5 +1,8 @@
 package screen;
 
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
+
 import cubesolve.CubeSolve;
 import group3.CubeActor;
 import group3.CubeManager;
@@ -10,6 +13,13 @@ public class LoadingScreen extends BaseScreen{
     private float time;
     public LoadingScreen(CubeSolve cubeSolve) {
         super(cubeSolve);
+        CubeActor cubeActor = new CubeActor();
+        cubeActor.setX(-0.5f);
+        cubeActor.setY(-0.5f);
+        cubeActor.setZ(-0.5f);
+        cubeActor.init();
+        addActor3d(cubeActor);
+        cubeActor.translate(0,0,0);
     }
 
     @Override

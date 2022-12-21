@@ -10,6 +10,7 @@ public class CommonViewport extends Viewport3D{
 
     public CommonViewport(){
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//        camera.position.set(5f, 5f, 5f);
         camera.position.set(5f, 5f, 5f);
         camera.lookAt(0, 0, 0);
         camera.near = 1f;

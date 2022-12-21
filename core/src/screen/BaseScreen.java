@@ -20,18 +20,22 @@ import stage3D.Stage3D;
 public class BaseScreen implements Sence3D {
     protected InputMultiplexer multiplexer;
     private CubeSolveInputProcessor camController;
+
     protected Stage3D stage3D;
     private Stage stage;
     private Label fps;
     protected CubeSolve solve;
+
     public BaseScreen(CubeSolve cubeSolve){
         this.solve = cubeSolve;
         multiplexer = new InputMultiplexer();
         camController = new CubeSolveInputProcessor(cubeSolve.getViewport3D().getCamera());
+
         stage3D = new Stage3D(cubeSolve.getViewport3D(),cubeSolve.getModelBatch());
         stage = new Stage(cubeSolve.getViewport(),cubeSolve.getHudBatch());
         multiplexer.addProcessor(stage);
         multiplexer.addProcessor(camController);
+
         Gdx.input.setInputProcessor(multiplexer);
 
         fps = new Label("",new Label.LabelStyle(){

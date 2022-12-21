@@ -32,6 +32,8 @@ public class CubeManager{
     }
 
     public void backRotation90(int index) {
+        if (!isTouch)return;
+
         getPageStr();
         update();
         for (int x = 0; x < 3; x++) {
@@ -60,6 +62,8 @@ public class CubeManager{
 
 
     public void backRotation90N(int index) {
+        if (!isTouch)return;
+
         getPageStr();
         update();
         for (int x = 0; x < 3; x++) {
@@ -86,6 +90,7 @@ public class CubeManager{
     }
 
     public void leftRotation90(int index) {
+        if (!isTouch)return;
         getPageStr();
         update();
         for (int y = 0; y < 3; y++) {
@@ -113,6 +118,7 @@ public class CubeManager{
     }
 
     public void leftRotation90N(int index) {
+        if (!isTouch)return;
         getPageStr();
         update();
         for (int y = 0; y < 3; y++) {
@@ -140,6 +146,7 @@ public class CubeManager{
     }
 
     public void bottomRotation90(int index) {
+        if (!isTouch)return;
         getPageStr();
         update();
         for (int x = 0; x < 3; x++) {
@@ -169,6 +176,7 @@ public class CubeManager{
     }
 
     public void bottomRotation90N(int index) {
+        if (!isTouch)return;
         getPageStr();
         update();
         for (int x = 0; x < 3; x++) {
@@ -198,6 +206,7 @@ public class CubeManager{
     }
 
     public void update(){
+        time = 0;
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 for (int z = 0; z < 3; z++) {
@@ -386,5 +395,16 @@ public class CubeManager{
             builder.append("R");
         }
         return builder.toString();
+    }
+
+    private float time;
+    private boolean isTouch = true;
+    public void render(float delta) {
+        time += delta;
+        if (time>3){
+            isTouch = true;
+        }else {
+            isTouch = false;
+        }
     }
 }

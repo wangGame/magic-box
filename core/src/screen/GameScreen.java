@@ -10,13 +10,20 @@ import group3.CubeManager;
 import listener.ClickListener3D;
 
 public class GameScreen extends BaseScreen{
+    private CubeManager manager;
     public GameScreen(CubeSolve cubeSolve) {
         super(cubeSolve);
-        CubeManager manager = new CubeManager(stage3D.getRoot());
+        manager = new CubeManager(stage3D.getRoot());
         multiplexer.addProcessor(new ClickListener3D(manager));
     }
 
-//    final Vector3 intersection = new Vector3();
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        manager.render(delta);
+    }
+
+    //    final Vector3 intersection = new Vector3();
 //    private void checkTileTouched() {
 //        if (Gdx.input.justTouched()) {
 //            Ray pickRay = stage3D.getCamera().getPickRay(Gdx.input.getX(), Gdx.input.getY());

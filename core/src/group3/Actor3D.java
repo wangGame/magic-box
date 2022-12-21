@@ -3,6 +3,8 @@ package group3;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.Array;
 
 import action.Action;
@@ -14,8 +16,10 @@ public class Actor3D {
     protected float x,y,z,depth;
     protected float width;
     protected float height;
+    protected BoundingBox boundingBox;
     public Actor3D(){
         array = new Array<Action>();
+        boundingBox = new BoundingBox();
     }
 
     public void act(float delta){
@@ -79,5 +83,20 @@ public class Actor3D {
 
     public float getZ() {
         return z;
+    }
+
+    private Vector3 vector3 = new Vector3();
+    public Actor3D hit(float x,float y,float z){
+        modelInstance.transform.getTranslation(vector3);
+        if ((x>=vector3.x && x<=vector3.x+width)
+                &&(y>=vector3.y && y<=vector3.y+height)
+                &&(z>=vector3.z && x<=vector3.z+depth)) {
+            return this;
+        }
+        return null;
+//        vector3.set(x,y,z);
+//        if (boundingBox.contains(vector3)) {
+//            return this;
+//        }return null;
     }
 }
