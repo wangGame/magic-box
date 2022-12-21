@@ -23,8 +23,9 @@ public class BaseScreen implements Sence3D {
     protected Stage3D stage3D;
     private Stage stage;
     private Label fps;
-
+    protected CubeSolve solve;
     public BaseScreen(CubeSolve cubeSolve){
+        this.solve = cubeSolve;
         multiplexer = new InputMultiplexer();
         camController = new CubeSolveInputProcessor(cubeSolve.getViewport3D().getCamera());
         stage3D = new Stage3D(cubeSolve.getViewport3D(),cubeSolve.getModelBatch());

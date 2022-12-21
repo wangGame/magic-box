@@ -333,4 +333,8 @@ public class CubeActor extends Actor3D {
         color[5] = new Color(oldColor5);
         setColor();
     }
+
+    public void addListener() {
+
+    }
 }

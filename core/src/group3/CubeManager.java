@@ -24,6 +24,7 @@ public class CubeManager{
                     actor.init();
                     root.addActor3d(actor);
                     cubeActors[x][y][z] = actor;
+                    actor.addListener();
                 }
             }
         }

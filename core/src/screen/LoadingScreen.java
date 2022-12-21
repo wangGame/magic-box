@@ -7,9 +7,17 @@ import listener.ClickListener3D;
 
 public class LoadingScreen extends BaseScreen{
 
+    private float time;
     public LoadingScreen(CubeSolve cubeSolve) {
         super(cubeSolve);
-        CubeManager manager = new CubeManager(stage3D.getRoot());
-        multiplexer.addProcessor(new ClickListener3D(manager));
+    }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        time += delta;
+        if (time > 1){
+            solve.setSence(new GameScreen(solve));
+        }
     }
 }
