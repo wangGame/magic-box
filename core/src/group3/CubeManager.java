@@ -43,6 +43,11 @@ public class CubeManager{
                     @Override
                     public void callBack(CubeActor cubeActor,CubeActor baseActor) {
                         cubeActor.rotationBackRotation(baseActor);
+                        if (check()) {
+                            System.out.println("success");
+                        }else {
+                            System.out.println("no ");
+                        }
                     }
                 });
 
@@ -73,6 +78,11 @@ public class CubeManager{
                     @Override
                     public void callBack(CubeActor cubeActor,CubeActor baseActor) {
                         cubeActor.rotationBackRotationN(baseActor);
+                        if (check()) {
+                            System.out.println("success");
+                        }else {
+                            System.out.println("no ");
+                        }
                     }
                 });
                 int tempx = (int) Math.round((x-1)*Math.cos(Math.toDegrees(-90))-(y-1)*Math.sin(Math.toDegrees(-90)) +1);
@@ -100,6 +110,11 @@ public class CubeManager{
                     @Override
                     public void callBack(CubeActor cubeActor,CubeActor baseActor) {
                         cubeActor.leftRotation(baseActor);
+                        if (check()) {
+                            System.out.println("success");
+                        }else {
+                            System.out.println("no ");
+                        }
                     }
                 });
                 int tempy = (int) Math.round((y-1)*Math.cos(Math.toDegrees(90))-(z-1)*Math.sin(Math.toDegrees(90)) +1);
@@ -128,6 +143,11 @@ public class CubeManager{
                     @Override
                     public void callBack(CubeActor cubeActor,CubeActor baseActor) {
                         cubeActor.leftRotationN(baseActor);
+                        if (check()) {
+                            System.out.println("success");
+                        }else {
+                            System.out.println("no ");
+                        }
                     }
                 });
                 int tempy = (int) Math.round((y-1)*Math.cos(Math.toDegrees(-90))-(z-1)*Math.sin(Math.toDegrees(-90)) +1);
@@ -156,6 +176,11 @@ public class CubeManager{
                     @Override
                     public void callBack(CubeActor cubeActor,CubeActor baseActor) {
                         cubeActor.bottomRotation(baseActor);
+                        if (check()) {
+                            System.out.println("success");
+                        }else {
+                            System.out.println("no ");
+                        }
                     }
                 });
 
@@ -186,6 +211,11 @@ public class CubeManager{
                     @Override
                     public void callBack(CubeActor cubeActor,CubeActor baseActor) {
                         cubeActor.bottomRotationN(baseActor);
+                        if (check()) {
+                            System.out.println("success");
+                        }else {
+                            System.out.println("no ");
+                        }
                     }
                 });
 
