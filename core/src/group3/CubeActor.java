@@ -17,11 +17,17 @@ import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * 绘制原理：
+ * 一个正方形有6个面，每个main单独设置颜色，
+ * rgb  uv   就这些参数一个一个放上去的
+ */
 public class CubeActor extends Actor3D {
     //    public Model model;
     private Color[] color;
@@ -30,6 +36,10 @@ public class CubeActor extends Actor3D {
     private ModelBuilder modelBuilder;
     private Material cubeMaterial;
     private Model model;
+
+    public Model getModel() {
+        return model;
+    }
 
     public CubeActor() {
         height = width = depth = 1;
@@ -54,6 +64,10 @@ public class CubeActor extends Actor3D {
                 VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
 
         //上
+        Texture cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
+        cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
+                TextureAttribute.createDiffuse(cubeletTexture));
+        cubeMaterial.id = "upMater";
         builder.setColor(color[0]);
         builder.setUVRange(0, 0, width, height);
         builder.rect(x, y + depth, z + depth,
@@ -64,7 +78,25 @@ public class CubeActor extends Actor3D {
         BoundingBox boundingBoxUp = new BoundingBox();
         boundingBoxUp.set(new Vector3(0,2,0),new Vector3(2,2,2));
         boundingBoxs[0] = boundingBoxUp;
-        //下
+        Mesh mesh = builder.end();
+        modelBuilder.part("cube1", mesh, GL20.GL_TRIANGLES, cubeMaterial);
+
+
+        cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
+        cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
+                TextureAttribute.createDiffuse(cubeletTexture));
+        builder.begin(VertexAttributes.Usage.Position |
+                VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
+
+//
+
+
+        cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
+        cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
+                TextureAttribute.createDiffuse(cubeletTexture));
+
+
+//        //下
         builder.setColor(color[1]);
         builder.setUVRange(0, 0, width, height);
         builder.rect(x, y, z,
@@ -72,9 +104,17 @@ public class CubeActor extends Actor3D {
                 x + depth, y, z + depth,
                 x, y, z + depth,
                 0, -1, 0);
-        BoundingBox boundingBoxDown = new BoundingBox();
-        boundingBoxDown.set(new Vector3(0,0,0),new Vector3(2,0,2));
-        boundingBoxs[1] = boundingBoxDown;
+        mesh = builder.end();
+        modelBuilder.part("cube2", mesh, GL20.GL_TRIANGLES, cubeMaterial);
+//
+        builder.begin(VertexAttributes.Usage.Position |
+                VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
+
+
+
+        cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
+        cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
+                TextureAttribute.createDiffuse(cubeletTexture));
 
         //后
         builder.setColor(color[2]);
@@ -84,9 +124,17 @@ public class CubeActor extends Actor3D {
                 x + depth, y, z,
                 x, y, z,
                 0, 0, -1);
-        BoundingBox boundingBoxBack = new BoundingBox();
-        boundingBoxBack.set(new Vector3(0,0,0),new Vector3(2,2,0));
-        boundingBoxs[2] = boundingBoxBack;
+        mesh = builder.end();
+        modelBuilder.part("cube2", mesh, GL20.GL_TRIANGLES, cubeMaterial);
+
+        builder.begin(VertexAttributes.Usage.Position |
+                VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
+
+
+
+        cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
+        cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
+                TextureAttribute.createDiffuse(cubeletTexture));
 
         //qian
         builder.setColor(color[3]);
@@ -96,9 +144,17 @@ public class CubeActor extends Actor3D {
                 x + depth, y + depth, z + depth,
                 x, y + depth, z + depth,
                 0, 0, 1);
-        BoundingBox boundingBoxFront = new BoundingBox();
-        boundingBoxFront.set(new Vector3(0,0,0),new Vector3(2,2,2));
-        boundingBoxs[3] = boundingBoxFront;
+        mesh = builder.end();
+        modelBuilder.part("cube3", mesh, GL20.GL_TRIANGLES, cubeMaterial);
+
+        builder.begin(VertexAttributes.Usage.Position |
+                VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
+
+
+
+        cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
+        cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
+                TextureAttribute.createDiffuse(cubeletTexture));
 
         //left
         builder.setColor(color[4]);
@@ -108,10 +164,16 @@ public class CubeActor extends Actor3D {
                 x, y + depth, z,
                 x, y, z,
                 -1, 0, 0);
-        BoundingBox boundingBoxLeft = new BoundingBox();
-        boundingBoxLeft.set(new Vector3(0,0,0),new Vector3(0,2,2));
-        boundingBoxs[4] = boundingBoxLeft;
+        mesh = builder.end();
+        modelBuilder.part("cube1", mesh, GL20.GL_TRIANGLES, cubeMaterial);
 
+        builder.begin(VertexAttributes.Usage.Position |
+                VertexAttributes.Usage.TextureCoordinates | VertexAttributes.Usage.ColorPacked | VertexAttributes.Usage.Normal, GL20.GL_TRIANGLES);
+
+
+        cubeletTexture = new Texture(Gdx.files.internal("cubelet.png"));
+        cubeMaterial = new Material(ColorAttribute.createSpecular(Color.WHITE),
+                TextureAttribute.createDiffuse(cubeletTexture));
 
         //you
         builder.setColor(color[5]);
@@ -121,12 +183,8 @@ public class CubeActor extends Actor3D {
                 x + depth, y + depth, z + depth,
                 x + depth, y, z + depth,
                 1, 0, 0);
-        BoundingBox boundingBoxRight = new BoundingBox();
-        boundingBoxRight.set(new Vector3(2,0,0),new Vector3(2,2,2));
-        boundingBoxs[5] = boundingBoxRight;
-
-        Mesh mesh = builder.end();
-        modelBuilder.part("cube", mesh, GL20.GL_TRIANGLES, cubeMaterial);
+        mesh = builder.end();
+        modelBuilder.part("cube6", mesh, GL20.GL_TRIANGLES, cubeMaterial);
         model = modelBuilder.end();
         modelInstance = new ModelInstance(model);
         model.calculateBoundingBox(this.boundingBox);
@@ -230,7 +288,7 @@ public class CubeActor extends Actor3D {
     }
 
     public void setColor(){
-        init();
+//        init();
 
 //        for (Material m : modelInstance.materials)
 //            m.set(ColorAttribute.createDiffuse(c));
@@ -398,22 +456,112 @@ public class CubeActor extends Actor3D {
             }
         }
         color[index] = Color.GRAY;
-        init();
+//        init();
     }
 
 
     public float disten(BoundingBox boundingBox,Ray ray){
-        boundingBox.getCenter(center);
-        boundingBox.getDimensions(dimensions);
-        Vector3 min = new Vector3(boundingBox.min);
+//        boundingBox.getCenter(center);
+//        boundingBox.getDimensions(dimensions);
+//        Vector3 min = new Vector3(boundingBox.min);
 
 
 
-        if (Intersector.intersectRayBoundsFast(ray, min, dimensions)){
-            return ray.origin.dst2(min);
-        }
+//        if (Intersector.intersectRayBoundsFast(ray, min, dimensions)){
+//            return ray.origin.dst2(min);
+//        }
         return -1f;
 
+    }
+
+    Vector3 temp = new Vector3();
+    Vector3 end = new Vector3();
+    //绕着某点 转动
+    public void rotateRad(Vector3 centerPoint,Vector3 axis,float angle){
+        modelInstance.transform.getTranslation(temp);
+        temp.rotate(axis,angle);
+        modelInstance.transform.translate(temp);
+    }
+
+    public void Rotate3(Vector3 center,
+                        double alphaX, double alphaY, double alphaZ) {
+        Vector3 temp = new Vector3();
+
+//        final float cos = (float)Math.cos(rotation * degreesToRadians);
+//        /** multiply by this to convert from degrees to radians */
+//        final float sin = (float)Math.sin(rotation * degreesToRadians);
+
+        modelInstance.transform.getTranslation(temp);
+        //Z Axis Rotation
+        double x3 = 1.0f;
+        double y3 = 1.0f;
+        double z3 = 1.0f;
+        double x4 = temp.x;
+        double y4 = temp.y;
+        double z4 = temp.z;
+
+
+//        x3 = (temp.x - center.x) * Math.cos(alphaZ)
+//                - (temp.y - center.y) * Math.sin(alphaZ);
+//        y3 = (temp.x - center.x )* Math.sin(alphaZ) +
+//                (temp.y - center.y) * Math.cos(alphaZ);
+//        z3 = temp.z;
+
+        //Y Axis Rotation
+        z4 = (z3) * (float)Math.cos(alphaY) -
+                (x3) * (float)Math.sin(alphaY);
+        x4 = (z3) * (float)Math.cos(alphaY) +
+                (x3) * (float)Math.sin(alphaY);
+        y4 = y3;
+        //X Axis Rotation
+//        end.y = (float) ((float) (y4 - center.y) * Math.cos(alphaX) - (z4 -center.z)* Math.sin(alphaX));
+//        end.z = (float) ((y4 - center.y) * Math.sin(alphaX) + (z4-center.z) * Math.cos(alphaX));
+//        end.x = (float) x4;
+//        modelInstance.transform.translate(0,0,0);
+//        modelInstance.transform.translate((float) x4,(float) y4,(float) z4);
+//        modelInstance.transform.rotateRad(Vector3.X,0.06f);
+        Quaternion quaternion = new Quaternion(1,0,0,0);
+        System.out.println(alphaY);
+        quaternion.setFromAxisRad(1,1,0, (float) alphaY);
+//        modelInstance.transform.setToTranslation(quaternion.x,quaternion.y,quaternion.z);
+//        modelInstance.transform.getRotation(quaternion);
+        quaternion.mul(20);
+//
+
+        float v = (float) (Math.cos(alphaY*0.1));
+        float v1 = (float) (Math.sin(alphaY*0.1));
+        Quaternion quaternion1 = new Quaternion();
+        quaternion1.x = v;
+        quaternion1.y = v1;
+        quaternion1.setEulerAngles(3,1,1);
+        modelInstance.transform.setToTranslation(quaternion1.x,quaternion1.y,quaternion.z);
+//        modelInstance.transform.setToRotation(Vector3.Z, (float) alphaY);
+        //        quaternion.mul(1);
+        System.out.println(quaternion.x + "   "+ quaternion.y +"  "+quaternion.z);
+
+//        modelInstance.transform.translate(-old.x,-old.y,-old.z);
+//        old.set(quaternion);
+    }
+    Quaternion old = new Quaternion();
+//    public void test(){
+//        float PI = 3.1415927f;
+//        float degreesToRadians = PI / 180;
+//        float rotation = 90;
+//        final float cos = (float)Math.cos(rotation * degreesToRadians);
+//        /** multiply by this to convert from degrees to radians */
+//        final float sin = (float)Math.sin(rotation * degreesToRadians);
+//        final float originX = center.x;
+//        final float originY = center.y;
+////        final float tox = (point.x - originX) ;
+////        final float toy = (point.y - originY) ;
+//        float endX = (tox * cos + toy * sin) + originX;
+//        float endY = (tox * -sin + toy * cos) + originY;
+//    }
+
+    private void rotate(Vector2 temp, Vector3 centerPoint, float angle) {
+        int tempx = (int) Math.round((x-1)*Math.cos(Math.toDegrees(angle))-(y-1)*Math.sin(Math.toDegrees(-angle)) +1);
+        int tempy = (int) Math.round((y-1)*Math.cos(Math.toDegrees(-angle))+(x-1)*Math.sin(Math.toDegrees(-angle))+1);
+        temp.set(tempx,tempy);
     }
 
 }
