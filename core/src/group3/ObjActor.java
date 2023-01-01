@@ -26,6 +26,8 @@ public class ObjActor extends Actor3D {
                 ColorAttribute.createSpecular(Color.BLACK));
         model.materials.add(cubeMaterial);
 
+
+
 //        ModelBuilder builder = new ModelBuilder();
 //        builder.part("part1", GL20.GL_TRIANGLES, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal, new Material());
 //        builder.setUVRange(0, 0, width, height);
