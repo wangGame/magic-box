@@ -10,7 +10,6 @@ public class CommonViewport extends Viewport3D{
 
     public CommonViewport(){
         camera = new PerspectiveCamera(67, 0.01f,0.01f);
-//        camera.position.set(5f, 5f, 5f);
         camera.position.set(10f, 10, 10f);
         camera.lookAt(0, 0, 0);
         camera.near = 1f;
@@ -18,10 +17,7 @@ public class CommonViewport extends Viewport3D{
         camera.update(true);
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1, 1, 1, 0.8f));
-//        environment.add(new DirectionalLight().set(1f, 1f, 1f, -6, -4, -7));
         environment.set(new ColorAttribute(ColorAttribute.Fog,0,0,0,1));
-
-
     }
 
 

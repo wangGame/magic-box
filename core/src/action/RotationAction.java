@@ -15,6 +15,7 @@ public class RotationAction extends Action{
     private float time;
     private float endAngle;
     private CallBack runnable;
+    private Actor3D baseActor;
 
     public RotationAction(CallBack runnable){
         this.runnable = runnable;
@@ -61,15 +62,12 @@ public class RotationAction extends Action{
 
     public void setAngleZ() {
         vector3.set(0,0,1);
-        System.out.println("--------------");
     }
 
     public void setAngleY() {
         vector3.set(0,1,0);
-        System.out.println("--------------");
     }
 
-    private Actor3D baseActor;
     public void setBaseActor(Actor3D actor) {
         this.baseActor = actor;
     }

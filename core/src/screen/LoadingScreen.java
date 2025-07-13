@@ -27,28 +27,28 @@ public class LoadingScreen extends BaseScreen{
     CubeActor cubeActor;
     public LoadingScreen(CubeSolve cubeSolve) {
         super(cubeSolve);
-//        for (int i = 0; i < 10; i++) {
-//            CubeActor cubeActor = new CubeActor();
-//            cubeActor.setX(0f);
-//            cubeActor.setY(0f);
-//            cubeActor.setZ(0f);
-//            cubeActor.init();
-//            addActor3d(cubeActor);
-//            cubeActor.translate(-9+i, 0, 0);
-////            cubeActor.translate(0, 0, 0);
-////            cubeActor.Rotate3(new Vector3(),0,90,0);
-//        }
         for (int i = 0; i < 10; i++) {
-//            CubeActor cubeActor = new CubeActor();
-//            cubeActor.setX(0f);
-//            cubeActor.setY(0f);
-//            cubeActor.setZ(0f);
-//            cubeActor.init();
-//            addActor3d(cubeActor);
-//            cubeActor.translate(0, 0, 0);
-//            Quaternion quaternion = new Quaternion(1,0,0,0);
-//            quaternion.setFromAxisRad(new Vector3(1.0f,0,0),90);
-//            cubeActor.getModelInstance().transform.set(quaternion);
+            CubeActor cubeActor = new CubeActor();
+            cubeActor.setX(0f);
+            cubeActor.setY(0f);
+            cubeActor.setZ(0f);
+            cubeActor.init();
+            addActor3d(cubeActor);
+            cubeActor.translate(-9+i, 0, 0);
+            cubeActor.translate(0, 0, 0);
+            cubeActor.Rotate3(new Vector3(),0,90,0);
+        }
+        for (int i = 0; i < 10; i++) {
+            CubeActor cubeActor = new CubeActor();
+            cubeActor.setX(0f);
+            cubeActor.setY(0f);
+            cubeActor.setZ(0f);
+            cubeActor.init();
+            addActor3d(cubeActor);
+            cubeActor.translate(0, 0, 0);
+            Quaternion quaternion = new Quaternion(1,0,0,0);
+            quaternion.setFromAxisRad(new Vector3(1.0f,0,0),90);
+            cubeActor.getModelInstance().transform.set(quaternion);
 
 
 
@@ -87,14 +87,14 @@ public class LoadingScreen extends BaseScreen{
 //        BoxActor actor = new BoxActor();
 //        addActor3d(actor);
 //
-        ObjActor objActor = new ObjActor("mofan.obj");
-        addActor3d(objActor);
-        System.out.println("--------------------");
-        Array<Material> materials = objActor.getModelInstance().materials;
-        for (Material material : materials) {
-            material.set(TextureAttribute.createDiffuse(
-                new Texture(Gdx.files.internal("mofan.jpg"))));
-        }
+//        ObjActor objActor = new ObjActor("mofan.obj");
+//        addActor3d(objActor);
+//        System.out.println("--------------------");
+//        Array<Material> materials = objActor.getModelInstance().materials;
+//        for (Material material : materials) {
+//            material.set(TextureAttribute.createDiffuse(
+//                new Texture(Gdx.files.internal("mofan.jpg"))));
+//        }
 //        cubeActor = new CubeActor();
 //        cubeActor.setX(0f);
 //        cubeActor.setY(0f);

@@ -78,28 +78,8 @@ public class Stage3D extends InputAdapter implements Disposable {
                 }
             }
             if (actor3D!=null) {
-//                actor3D.getModelInstance().transform.scale(0.9f,0.9f,0.9f);
                 actor3D.rayTest(pickRay);
-//                actor3D.getModelInstance().transform.scale(0.99f,0.99f,0.99f);
-            }
-//            if (x >= 0 && x < Constance.MAP_WIDTH && z >= 0 && z < Constance.MAP_HEIGHT) {
-//                if (lastSelectedTile != null) {
-//                    lastSelectedTile.setUseLighting(true);
-//                }
-//                Cube[][][] cubes = dlevel.getCubes();
-//                Cube cube = cubes[x][z][0];
-//                if (cube != null) {
-//                    cube.setUseLighting(false);
-//                }
-//                lastSelectedTile = cube;
-//                if (actor.getCurrentPath() == null) {
-//                    NavPath path = dlevel.getPath(actor.getPos().x, actor.getPos().z, x, z);
-//                    if (path != null) {
-//                        actor.setCurrentPath(path);
-//                    }
-//                }
             }
         }
-
-
+    }
 }

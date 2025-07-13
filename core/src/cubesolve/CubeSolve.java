@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import ai.Solv;
 import game3D.Game3D;
+import screen.GameScreen;
 import screen.LoadingScreen;
 import stage3D.Stage3D;
 import viewport3D.CommonViewport;
@@ -76,7 +77,7 @@ public class CubeSolve extends Game3D {
 		Gdx.app.postRunnable(new Runnable() {
 			@Override
 			public void run() {
-				setSence(new LoadingScreen(CubeSolve.this));
+				setSence(new GameScreen(CubeSolve.this));
 			}
 		});
 //
